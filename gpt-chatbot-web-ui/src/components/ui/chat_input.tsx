@@ -14,14 +14,16 @@ export default function ChatInput() {
   }, [value]);
   return (
     <div className="flex fixed bottom-0 left-0 w-full py-10 justify-center">
-      <textarea
-        ref={textarea_ref}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        rows={1}
-        className="border resize-none break-words bg-white rounded-xl dark:bg-gray-500 p-2 w-[min(90%,750px)]"
-        placeholder={t("Type your question here.")}
-      />
+      <div className="flex w-[min(90%,750px)] bg-white dark:bg-gray-500 p-2 border rounded-xl">
+        <textarea
+          ref={textarea_ref}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          rows={1}
+          className="flex-grow resize-none break-words bg-white dark:bg-gray-500 focus:outline-none"
+          placeholder={t("Type your question here.")}
+        />
+      </div>
     </div>
   );
 }
