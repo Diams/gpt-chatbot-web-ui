@@ -1,6 +1,7 @@
 import { createInstance, i18n, Resource } from "i18next";
 import { initReactI18next } from "react-i18next/initReactI18next";
 import resourcesToBackend from "i18next-resources-to-backend";
+import { i18nConfig } from "../../i18n_config";
 import path from "path";
 import { promises as fs } from "fs";
 
@@ -9,11 +10,6 @@ type InitTranslationsParams = {
   namespaces: string[]; // ロードしたい名前空間
   i18nInstance?: i18n; // すでに生成済みの i18n インスタンス (クライアント用)
   resources?: Resource; // 既にサーバーから受け取った翻訳リソース
-};
-
-const i18nConfig = {
-  locales: ["en", "ja"] as const,
-  defaultLocale: "en", // Dafault locale
 };
 
 export async function initTranslations({
