@@ -33,6 +33,7 @@ body {
 ::-webkit-scrollbar-track {
   background-color: transparent;
   border-radius: 10px;
+  cursor: default;
 }
 
 ::-webkit-scrollbar-track:hover {
@@ -42,6 +43,7 @@ body {
 ::-webkit-scrollbar-thumb {
   background-color: #ccc;
   border-radius: 10px;
+  cursor: default;
 }
 
 ::-webkit-scrollbar-thumb:hover {
