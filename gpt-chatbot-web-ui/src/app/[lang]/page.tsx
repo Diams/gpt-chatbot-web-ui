@@ -1,3 +1,5 @@
+import { initTranslations } from "@/lib/i18n";
+
 type HomePagePromiseProps = {
   lang: string;
 };
@@ -8,5 +10,9 @@ type HomePageProps = {
 
 export default async function Home(props: HomePageProps) {
   const { lang } = await props.params;
-  return <main>{lang}</main>;
+  const { t } = await initTranslations({
+    locale: lang,
+    namespaces: ["temporary"],
+  });
+  return <main>{t("This is the English locale.")}</main>;
 }
