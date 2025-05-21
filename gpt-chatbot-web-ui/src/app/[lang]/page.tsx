@@ -1,4 +1,4 @@
-import ChatInput from "@/components/chat_input";
+import ChatInput from "@/components/ui/chat_input";
 
 type HomePagePromiseProps = {
   lang: string;
