@@ -19,7 +19,7 @@ export default function ChatInput() {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         rows={1}
-        className="border break-words bg-white rounded-xl dark:bg-gray-500 p-2 w-[min(90%,750px)]"
+        className="border resize-none break-words bg-white rounded-xl dark:bg-gray-500 p-2 w-[min(90%,750px)]"
         placeholder={t("Type your question here.")}
       />
     </div>
