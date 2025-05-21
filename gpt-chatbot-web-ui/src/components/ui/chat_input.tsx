@@ -1,10 +1,9 @@
-import { initTranslations } from "@/lib/i18n";
+"use client";
 
-export default async function ChatInput({ lang }: { lang: string }) {
-  const { t } = await initTranslations({
-    locale: lang,
-    namespaces: ["chat_room"],
-  });
+import { useTranslation } from "react-i18next";
+
+export default function ChatInput() {
+  const { t } = useTranslation();
   return (
     <div className="flex fixed bottom-0 left-0 w-full py-10 justify-center">
       <textarea
