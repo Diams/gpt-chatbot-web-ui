@@ -5,5 +5,9 @@ export default async function ChatInput({ lang }: { lang: string }) {
     locale: lang,
     namespaces: ["temporary"],
   });
-  return <div>{t("This is ChatInput component.")}</div>;
+  return (
+    <div className="fixed bottom-0 left-0 w-full">
+      {t("This is ChatInput component.")}
+    </div>
+  );
 }
