@@ -1,3 +1,5 @@
+import TranslationsProvider from "@/components/providers/translations_provider";
+import ChatInput from "@/components/ui/chat_input";
 import { initTranslations } from "@/lib/i18n";
 
 type HomePagePromiseProps = {
@@ -10,9 +12,20 @@ type HomePageProps = {
 
 export default async function Home(props: HomePageProps) {
   const { lang } = await props.params;
-  const { t } = await initTranslations({
+  const namespaces = ["chat_room"];
+  const { resources } = await initTranslations({
     locale: lang,
-    namespaces: ["temporary"],
+    namespaces,
   });
-  return <main>{t("This is the English locale.")}</main>;
+  return (
+    <main>
+      <TranslationsProvider
+        locale={lang}
+        namespaces={namespaces}
+        resources={resources}
+      >
+        <ChatInput />
+      </TranslationsProvider>
+    </main>
+  );
 }
