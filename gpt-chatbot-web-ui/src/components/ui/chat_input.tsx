@@ -23,7 +23,7 @@ export default function ChatInput() {
       <div
         className="border-2 rounded-full p-2 ml-2 cursor-pointer transition-colors hover:bg-gray-900 hover:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-900 active:scale-90"
         onClick={() => {
-          console.log("send");
+          set_input("");
         }}
       >
         <IconSend />
