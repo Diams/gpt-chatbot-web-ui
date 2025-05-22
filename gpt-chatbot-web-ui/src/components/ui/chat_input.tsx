@@ -16,12 +16,13 @@ export default function ChatInput() {
           className="flex-grow resize-none break-word focus:outline-none"
         />
       </div>
-      <div className="border-2 rounded-full p-2 ml-2 cursor-pointer transition-colors hover:bg-gray-900 hover:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-900 active:scale-90">
-        <IconSend
-          onClick={() => {
-            console.log("send.");
-          }}
-        />
+      <div
+        className="border-2 rounded-full p-2 ml-2 cursor-pointer transition-colors hover:bg-gray-900 hover:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-900 active:scale-90"
+        onClick={() => {
+          console.log("send");
+        }}
+      >
+        <IconSend />
       </div>
     </div>
   );
