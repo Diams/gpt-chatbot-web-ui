@@ -1,5 +1,6 @@
 import TranslationsProvider from "@/components/providers/translations_provider";
 import ChatInput from "@/components/ui/chat_input";
+import Conversations from "@/components/ui/conversations";
 import { initTranslations } from "@/lib/i18n";
 
 type HomePagePromiseProps = {
@@ -24,6 +25,7 @@ export default async function Home(props: HomePageProps) {
         namespaces={namespaces}
         resources={resources}
       >
+        <Conversations />
         <ChatInput />
       </TranslationsProvider>
     </main>
