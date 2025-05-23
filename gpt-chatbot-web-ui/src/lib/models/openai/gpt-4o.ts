@@ -1,4 +1,13 @@
 export async function Request(prompt: string): Promise<string> {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-  return "Answer from some GPT model.";
+  const response = await fetch("/api/chat/completions/openai/gpt-4o", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      prompt: prompt,
+    }),
+  });
+  const answer = await response.json();
+  return answer.answer;
 }
