@@ -53,22 +53,36 @@ export default function CodeBlock({
       <SyntaxHighlighter language={language} style={oneDark}>
         {code}
       </SyntaxHighlighter>
-      <button
-        onClick={handleCopy}
-        className="absolute top-9 right-13 opacity-0 group-hover:opacity-100 text-sm px-2 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 transition"
-      >
-        {copy_value === "Copy" ? (
-          <IconCopy size={20} />
-        ) : (
-          <IconCopyCheckFilled size={20} color="lightgreen" />
-        )}
-      </button>
-      <button
-        onClick={handleSave}
-        className="absolute top-9 right-2 opacity-0 group-hover:opacity-100 text-sm px-2 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 transition"
-      >
-        <IconFileDownload size={20} />
-      </button>
+      <div className="absolute top-8 right-13 opacity-0 group-hover:opacity-100 transition">
+        <div className="relative group/copy">
+          <button
+            onClick={handleCopy}
+            className="p-2 bg-gray-700 text-white rounded hover:bg-gray-600"
+          >
+            {copy_value === "Copy" ? (
+              <IconCopy size={20} />
+            ) : (
+              <IconCopyCheckFilled size={20} color="lightgreen" />
+            )}
+          </button>
+          <span className="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 scale-0 group-hover/copy:scale-100 transition bg-black text-white text-xs px-2 py-1 rounded pointer-events-none whitespace-nowrap">
+            {copy_value}
+          </span>
+        </div>
+      </div>
+      <div className="absolute top-8 right-2 opacity-0 group-hover:opacity-100 transition">
+        <div className="relative group/save">
+          <button
+            onClick={handleSave}
+            className="p-2 bg-gray-700 text-white rounded hover:bg-gray-600"
+          >
+            <IconFileDownload size={20} />
+          </button>
+          <span className="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 scale-0 group-hover/save:scale-100 transition bg-black text-white text-xs px-2 py-1 rounded pointer-events-none whitespace-nowrap">
+            Save
+          </span>
+        </div>
+      </div>
     </div>
   );
 }
