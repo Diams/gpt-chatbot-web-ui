@@ -6,6 +6,7 @@ import rehypeKatex from "rehype-katex";
 import rehypeSanitize from "rehype-sanitize";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
+import CodeBlock from "./markdown_parts/code_block";
 import "katex/dist/katex.min.css";
 
 export default function ChatMessageUI({
@@ -36,6 +37,7 @@ export default function ChatMessageUI({
               <ReactMarkdown
                 remarkPlugins={[remarkGfm, remarkMath]}
                 rehypePlugins={[rehypeSanitize, rehypeKatex]}
+                components={{ code: CodeBlock }}
               >
                 {message}
               </ReactMarkdown>
