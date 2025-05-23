@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useChatRoom } from "@/components/providers/chat_room_provider";
 import ChatMessageUI from "./conversations/chat_message_ui";
 import ChatMessage from "@/lib/chat/chat_message";
@@ -11,6 +11,7 @@ export default function Conversations() {
   const [conversations_value, set_conversations] = useState([
     ...chat_room.Conversations,
   ]);
+  const bottom_item = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const added_conversation_listener = (new_message: ChatMessage) => {
       set_conversations((prev_conversations: ChatMessage[]) => [
@@ -23,6 +24,9 @@ export default function Conversations() {
       chat_room.off("added_conversation", added_conversation_listener);
     };
   }, [chat_room]);
+  const handle_scroll_button = () => {
+    bottom_item.current?.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <div>
       <div className="mb-100">
@@ -34,8 +38,12 @@ export default function Conversations() {
           />
         ))}
       </div>
+      <div ref={bottom_item}></div>
       <div className="fixed bottom-0 right-0 pr-15 pb-25">
-        <button className="border-2 rounded-full cursor-pointer transition-colors hover:bg-gray-900 hover:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-900 active:scale-90">
+        <button
+          onClick={handle_scroll_button}
+          className="border-2 rounded-full cursor-pointer transition-colors hover:bg-gray-900 hover:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-900 active:scale-90"
+        >
           <div className="m-2">
             <IconArrowDown />
           </div>
