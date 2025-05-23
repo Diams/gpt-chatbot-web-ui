@@ -4,12 +4,17 @@ import { IconSend } from "@tabler/icons-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import TextareaAutosize from "react-textarea-autosize";
+import { useChatRoom } from "@/components/providers/chat_room_provider";
 
 export default function ChatInput() {
   const { t } = useTranslation();
   const [input_value, set_input] = useState("");
+  const chat_room = useChatRoom();
   const handle_send = () => {
-    set_input("");
+    if (input_value !== "") {
+      chat_room.Chat(input_value);
+      set_input("");
+    }
   };
   return (
     <div className="flex fixed bottom-0 left-0 w-full py-10 justify-center items-center px-2">
