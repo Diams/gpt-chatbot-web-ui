@@ -18,10 +18,10 @@ export default function CodeBlock({
   inline?: boolean;
   className?: string;
 }) {
+  const [copy_value, set_copy] = useState<"Copy" | "Copied!">("Copy");
   if (!(!!className && className.startsWith("language-"))) {
     return <code className={className}>{children}</code>;
   }
-  const [copy_value, set_copy] = useState<"Copy" | "Copied!">("Copy");
   const code = String(children).trim();
   const language = className.replace("language-", "");
   const handleCopy = async () => {
