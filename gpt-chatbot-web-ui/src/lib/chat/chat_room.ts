@@ -12,6 +12,12 @@ export default class ChatRoom {
   }
 
   public Chat(prompt: string) {
-    console.log(prompt);
+    this.AddConversation("user", prompt);
+    this.AddConversation("assistant", "Answer from some GPT model.");
+  }
+
+  private AddConversation(role: string, message: string) {
+    const new_conversation: ChatMessage = { role, message };
+    this.conversations = [...this.conversations, new_conversation];
   }
 }
