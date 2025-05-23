@@ -1,7 +1,7 @@
 import { createInstance, i18n, Resource } from "i18next";
 import { initReactI18next } from "react-i18next/initReactI18next";
 import resourcesToBackend from "i18next-resources-to-backend";
-import { i18nConfig } from "../../i18n_config";
+import { i18nConfig } from "../../../i18n_config";
 import path from "path";
 import { promises as fs } from "fs";
 
