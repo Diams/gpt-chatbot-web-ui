@@ -1,4 +1,5 @@
 import TranslationsProvider from "@/components/providers/translations_provider";
+import ChatHistorySidebar from "@/components/ui/chat_history_sidebar";
 import ChatRoomUI from "@/components/ui/chat_room_ui";
 import { initTranslations } from "@/lib/localization/i18n";
 
@@ -24,6 +25,7 @@ export default async function Home(props: HomePageProps) {
         namespaces={namespaces}
         resources={resources}
       >
+        <ChatHistorySidebar />
         <ChatRoomUI />
       </TranslationsProvider>
     </main>
