@@ -1,6 +1,6 @@
 "use client";
 
-import { IconSend } from "@tabler/icons-react";
+import { IconSend, IconSendOff } from "@tabler/icons-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import TextareaAutosize from "react-textarea-autosize";
@@ -45,7 +45,7 @@ export default function ChatInput() {
           await handle_send();
         }}
       >
-        <IconSend />
+        {is_blocked_input_bar_value ? <IconSendOff /> : <IconSend />}
       </div>
     </div>
   );
