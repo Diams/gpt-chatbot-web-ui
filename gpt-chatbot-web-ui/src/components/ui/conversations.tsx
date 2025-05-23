@@ -2,7 +2,7 @@
 
 import { useTranslation } from "react-i18next";
 import ChatRoom from "@/lib/chat/chat_room";
-import ChatMessage from "./conversations/chat_message";
+import ChatMessageUI from "./conversations/chat_message_ui";
 
 export default function Conversations() {
   const { t } = useTranslation("temporary");
@@ -27,7 +27,7 @@ export default function Conversations() {
   return (
     <div>
       {dummy_conversations.map((conversation, index) => (
-        <ChatMessage
+        <ChatMessageUI
           key={index}
           role={conversation.role}
           message={conversation.message}

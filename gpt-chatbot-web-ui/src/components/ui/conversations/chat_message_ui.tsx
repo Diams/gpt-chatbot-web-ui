@@ -2,7 +2,7 @@
 
 import { IconRobot, IconUser } from "@tabler/icons-react";
 
-export default function ChatMessage({
+export default function ChatMessageUI({
   role,
   message,
 }: {

@@ -1,7 +1,9 @@
-export default class ChatRoom {
-  private conversations: { role: string; message: string }[];
+import ChatMessage from "./chat_message";
 
-  constructor(cst_conversations: { role: string; message: string }[]) {
+export default class ChatRoom {
+  private conversations: ChatMessage[];
+
+  constructor(cst_conversations: ChatMessage[]) {
     this.conversations = [...cst_conversations];
   }
 
