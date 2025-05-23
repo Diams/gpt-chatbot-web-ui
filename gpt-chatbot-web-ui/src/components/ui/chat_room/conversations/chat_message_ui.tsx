@@ -41,7 +41,9 @@ export default function ChatMessageUI({
             <div>
               <IconUser size={30} />
             </div>
-            <div className="flex-grow whitespace-pre-wrap">{message}</div>
+            <div className="flex-grow whitespace-pre-wrap overflow-auto">
+              {message}
+            </div>
             <div>
               <div className="relative group">
                 <button
@@ -67,14 +69,16 @@ export default function ChatMessageUI({
             <div>
               <IconRobot size={30} />
             </div>
-            <div className="flex-grow prose dark:prose-invert max-w-none">
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm, remarkMath]}
-                rehypePlugins={[rehypeSanitize, rehypeKatex]}
-                components={{ code: CodeBlock }}
-              >
-                {message}
-              </ReactMarkdown>
+            <div className="flex-grow overflow-auto">
+              <div className="prose dark:prose-invert max-w-none">
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm, remarkMath]}
+                  rehypePlugins={[rehypeSanitize, rehypeKatex]}
+                  components={{ code: CodeBlock }}
+                >
+                  {message}
+                </ReactMarkdown>
+              </div>
             </div>
             <div>
               <div className="relative group">
