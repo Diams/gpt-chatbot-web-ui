@@ -27,6 +27,9 @@ export default function Conversations() {
   const handle_scroll_button = () => {
     bottom_item.current?.scrollIntoView({ behavior: "smooth" });
   };
+  useEffect(() => {
+    handle_scroll_button();
+  }, [conversations_value]);
   return (
     <div>
       <div className="mb-100">
