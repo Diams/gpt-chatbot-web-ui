@@ -16,7 +16,7 @@ export default class ChatRoom extends EventEmitter {
 
   public async Chat(prompt: string) {
     this.AddConversation("user", prompt);
-    const answer = await Request(prompt, this.conversations);
+    const answer = await Request(this.conversations);
     this.AddConversation("assistant", answer);
   }
 

@@ -5,7 +5,7 @@ import { OpenAiApiKey } from "@/lib/models/api_key_provider";
 const client = new OpenAI({ apiKey: OpenAiApiKey });
 
 export async function POST(request: NextRequest): Promise<Response> {
-  const { prompt, messages } = await request.json();
+  const { messages } = await request.json();
   const completion = await client.chat.completions.create({
     model: "gpt-4o",
     messages: messages,
