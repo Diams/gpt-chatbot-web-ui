@@ -28,7 +28,7 @@ export default function Conversations() {
         <ChatMessageUI
           key={index}
           role={conversation.role}
-          message={conversation.message}
+          message={conversation.content}
         />
       ))}
     </div>
