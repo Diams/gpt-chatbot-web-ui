@@ -9,7 +9,14 @@ export async function POST(request: NextRequest): Promise<Response> {
   const completion = await client.chat.completions.create({
     model: "gpt-4o",
     messages: messages,
+    stream: true,
   });
-  const answer = completion.choices[0].message.content ?? "";
+  let answer = "";
+  for await (const chunk of completion) {
+    const delta = chunk.choices[0].delta;
+    if (delta?.content) {
+      answer += delta.content;
+    }
+  }
   return Response.json({ answer: answer });
 }
