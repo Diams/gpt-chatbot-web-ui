@@ -13,8 +13,9 @@ export default class ChatRoom extends EventEmitter {
     return this.conversations;
   }
 
-  public Chat(prompt: string) {
+  public async Chat(prompt: string) {
     this.AddConversation("user", prompt);
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     this.AddConversation("assistant", "Answer from some GPT model.");
   }
 
