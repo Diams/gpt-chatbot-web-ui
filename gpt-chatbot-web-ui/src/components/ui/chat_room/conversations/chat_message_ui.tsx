@@ -1,6 +1,12 @@
 "use client";
 
-import { IconRobot, IconUser } from "@tabler/icons-react";
+import {
+  IconCopy,
+  IconCopyCheckFilled,
+  IconRobot,
+  IconUser,
+} from "@tabler/icons-react";
+import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeKatex from "rehype-katex";
 import rehypeSanitize from "rehype-sanitize";
@@ -16,24 +22,47 @@ export default function ChatMessageUI({
   role: string;
   message: string;
 }) {
+  const [copy_value, set_copy] = useState<"Copy" | "Copied!">("Copy");
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(message);
+      set_copy("Copied!");
+      await new Promise((resolve) => setTimeout(resolve, 400));
+      set_copy("Copy");
+    } catch {
+      alert("Failed to copy.");
+    }
+  };
   return (
     <div>
       {role === "user" ? (
-        <div className="flex justify-center">
+        <div className="flex justify-center items-start">
           <div className="w-[min(90%,750px)] flex flex-row py-6 gap-6">
             <div>
               <IconUser size={30} />
             </div>
-            <div className="whitespace-pre-wrap">{message}</div>
+            <div className="flex-grow whitespace-pre-wrap">{message}</div>
+            <div>
+              <button
+                onClick={handleCopy}
+                className="hover:text-gray-600 cursor-pointer flex"
+              >
+                {copy_value === "Copy" ? (
+                  <IconCopy />
+                ) : (
+                  <IconCopyCheckFilled color="lightgreen" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
       ) : (
-        <div className="bg-gray-200 dark:bg-gray-800 flex justify-center">
+        <div className="bg-gray-200 dark:bg-gray-800 flex justify-center items-start">
           <div className="w-[min(90%,750px)] flex flex-row py-6 gap-6">
             <div>
               <IconRobot size={30} />
             </div>
-            <div className="prose dark:prose-invert max-w-none">
+            <div className="flex-grow prose dark:prose-invert max-w-none">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm, remarkMath]}
                 rehypePlugins={[rehypeSanitize, rehypeKatex]}
@@ -41,6 +70,18 @@ export default function ChatMessageUI({
               >
                 {message}
               </ReactMarkdown>
+            </div>
+            <div>
+              <button
+                onClick={handleCopy}
+                className="hover:text-gray-600 cursor-pointer flex"
+              >
+                {copy_value === "Copy" ? (
+                  <IconCopy />
+                ) : (
+                  <IconCopyCheckFilled color="lightgreen" />
+                )}
+              </button>{" "}
             </div>
           </div>
         </div>
