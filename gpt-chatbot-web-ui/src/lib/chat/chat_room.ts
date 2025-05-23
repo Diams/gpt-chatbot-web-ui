@@ -16,16 +16,34 @@ export default class ChatRoom extends EventEmitter {
 
   public async Chat(prompt: string) {
     this.AddConversation("user", prompt);
-    let answer = "";
+    let counter = 0;
     for await (const chunk of Request(this.conversations)) {
-      answer += chunk;
+      if (counter == 0) {
+        this.AddConversation("assistant", chunk);
+      } else {
+        const target_index = this.conversations.length - 1;
+        const new_chat_message = {
+          role: "assistant",
+          content: this.conversations[target_index].content + chunk,
+        };
+        this.UpdateConversation(target_index, new_chat_message);
+      }
+      counter++;
     }
-    this.AddConversation("assistant", answer);
+    this.emit(
+      "completed_chat",
+      this.conversations[this.conversations.length - 1]
+    );
   }
 
   private AddConversation(role: string, message: string) {
     const new_conversation: ChatMessage = { role, content: message };
     this.conversations = [...this.conversations, new_conversation];
     this.emit("added_conversation", new_conversation);
+  }
+
+  private UpdateConversation(index: number, new_chat_message: ChatMessage) {
+    this.conversations[index] = new_chat_message;
+    this.emit("updated_conversation", { index, new_chat_message });
   }
 }
