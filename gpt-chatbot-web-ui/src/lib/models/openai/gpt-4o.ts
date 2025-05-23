@@ -11,6 +11,7 @@ export async function Request(
     },
     body: JSON.stringify({
       prompt: prompt,
+      messages: conversations,
     }),
   });
   const answer = await response.json();
