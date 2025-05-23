@@ -1,29 +1,12 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import ChatRoom from "@/lib/chat/chat_room";
+import { useChatRoom } from "@/components/providers/chat_room_provider";
 import ChatMessageUI from "./conversations/chat_message_ui";
 
 export default function Conversations() {
   const { t } = useTranslation("temporary");
-  const dummy_conversations = new ChatRoom([
-    {
-      role: "user",
-      message: "Hello.",
-    },
-    {
-      role: "assistant",
-      message: "Hi there! How are you?",
-    },
-    {
-      role: "user",
-      message: "I'm good, thanks. And you?",
-    },
-    {
-      role: "assistant",
-      message: "I'm doing well, too.",
-    },
-  ]).Conversations;
+  const dummy_conversations = useChatRoom().Conversations;
   return (
     <div>
       {dummy_conversations.map((conversation, index) => (

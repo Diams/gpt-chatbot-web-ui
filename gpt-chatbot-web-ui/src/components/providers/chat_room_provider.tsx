@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, createContext } from "react";
+import { createContext, useContext, ReactNode } from "react";
 import ChatRoom from "@/lib/chat/chat_room";
 
 const ChatRoomContext = createContext<ChatRoom | null>(null);
@@ -17,4 +17,12 @@ export default function ChatRoomProvider({
       {children}
     </ChatRoomContext.Provider>
   );
+}
+
+export function useChatRoom() {
+  const context = useContext(ChatRoomContext);
+  if (!context) {
+    throw new Error("useChatRoom must be used within a ChatRoomProvider.");
+  }
+  return context;
 }
