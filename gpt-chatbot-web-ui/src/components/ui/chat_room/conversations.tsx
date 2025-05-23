@@ -20,8 +20,23 @@ export default function Conversations() {
       ]);
     };
     chat_room.on("added_conversation", added_conversation_listener);
+    const updated_conversation_listener = ({
+      index,
+      new_chat_message,
+    }: {
+      index: number;
+      new_chat_message: ChatMessage;
+    }) => {
+      set_conversations((prev_conversations: ChatMessage[]) => {
+        const new_conversations = [...prev_conversations];
+        new_conversations[index] = new_chat_message;
+        return new_conversations;
+      });
+    };
+    chat_room.on("updated_conversation", updated_conversation_listener);
     return () => {
       chat_room.off("added_conversation", added_conversation_listener);
+      chat_room.off("updated_conversation", updated_conversation_listener);
     };
   }, [chat_room]);
   const handle_scroll_button = () => {
