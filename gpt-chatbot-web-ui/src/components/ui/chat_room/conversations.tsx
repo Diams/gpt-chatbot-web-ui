@@ -23,7 +23,7 @@ export default function Conversations() {
     };
   }, [chat_room]);
   return (
-    <div>
+    <div className="mb-100">
       {conversations_value.map((conversation, index) => (
         <ChatMessageUI
           key={index}
