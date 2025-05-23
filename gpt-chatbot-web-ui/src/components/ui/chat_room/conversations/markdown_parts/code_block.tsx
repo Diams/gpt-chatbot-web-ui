@@ -1,5 +1,10 @@
 "use client";
 
+import {
+  IconCopy,
+  IconCopyCheckFilled,
+  IconFileDownload,
+} from "@tabler/icons-react";
 import { ReactNode, useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -17,7 +22,6 @@ export default function CodeBlock({
     return <code className={className}>{children}</code>;
   }
   const [copy_value, set_copy] = useState<"Copy" | "Copied!">("Copy");
-  const [save_value, set_save] = useState<"Save" | "Saved!">("Save");
   const code = String(children).trim();
   const language = className.replace("language-", "");
   const handleCopy = async () => {
@@ -39,9 +43,6 @@ export default function CodeBlock({
       a.download = `code.${GetExtension(language)}`;
       a.click();
       URL.revokeObjectURL(url);
-      set_save("Saved!");
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      set_save("Save");
     } catch {
       alert("Failed to save.");
     }
@@ -54,15 +55,19 @@ export default function CodeBlock({
       </SyntaxHighlighter>
       <button
         onClick={handleCopy}
-        className="absolute top-9 right-20 opacity-0 group-hover:opacity-100 text-sm px-2 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 transition"
+        className="absolute top-9 right-13 opacity-0 group-hover:opacity-100 text-sm px-2 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 transition"
       >
-        {copy_value}
+        {copy_value === "Copy" ? (
+          <IconCopy size={20} />
+        ) : (
+          <IconCopyCheckFilled size={20} color="lightgreen" />
+        )}
       </button>
       <button
         onClick={handleSave}
         className="absolute top-9 right-2 opacity-0 group-hover:opacity-100 text-sm px-2 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 transition"
       >
-        {save_value}
+        <IconFileDownload size={20} />
       </button>
     </div>
   );
