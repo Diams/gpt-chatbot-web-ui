@@ -43,16 +43,21 @@ export default function ChatMessageUI({
             </div>
             <div className="flex-grow whitespace-pre-wrap">{message}</div>
             <div>
-              <button
-                onClick={handleCopy}
-                className="hover:text-gray-600 cursor-pointer flex"
-              >
-                {copy_value === "Copy" ? (
-                  <IconCopy />
-                ) : (
-                  <IconCopyCheckFilled color="lightgreen" />
-                )}
-              </button>
+              <div className="relative group">
+                <button
+                  onClick={handleCopy}
+                  className="hover:text-gray-600 cursor-pointer flex"
+                >
+                  {copy_value === "Copy" ? (
+                    <IconCopy />
+                  ) : (
+                    <IconCopyCheckFilled color="lightgreen" />
+                  )}
+                </button>
+                <span className="absolute top-full mb-1 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition bg-black text-white text-xs px-2 py-1 rounded pointer-events-none whitespace-nowrap z-10">
+                  {copy_value}
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -72,16 +77,21 @@ export default function ChatMessageUI({
               </ReactMarkdown>
             </div>
             <div>
-              <button
-                onClick={handleCopy}
-                className="hover:text-gray-600 cursor-pointer flex"
-              >
-                {copy_value === "Copy" ? (
-                  <IconCopy />
-                ) : (
-                  <IconCopyCheckFilled color="lightgreen" />
-                )}
-              </button>{" "}
+              <div className="relative group">
+                <button
+                  onClick={handleCopy}
+                  className="hover:text-gray-600 cursor-pointer flex"
+                >
+                  {copy_value === "Copy" ? (
+                    <IconCopy />
+                  ) : (
+                    <IconCopyCheckFilled color="lightgreen" />
+                  )}
+                </button>
+                <span className="absolute top-full mb-1 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition bg-black text-white text-xs px-2 py-1 rounded pointer-events-none whitespace-nowrap z-10">
+                  {copy_value}
+                </span>
+              </div>
             </div>
           </div>
         </div>
