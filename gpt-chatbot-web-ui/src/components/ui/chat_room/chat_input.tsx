@@ -22,7 +22,7 @@ export default function ChatInput() {
     }
   };
   return (
-    <div className="flex fixed bottom-0 left-0 w-full py-10 justify-center items-center px-2">
+    <div className="flex fixed bottom-0 left-0 w-full pb-10 justify-center items-center px-2">
       <div className="flex w-[min(90%,750px)] bg-white dark:bg-gray-500 p-2 border rounded-xl">
         <TextareaAutosize
           maxRows={10}

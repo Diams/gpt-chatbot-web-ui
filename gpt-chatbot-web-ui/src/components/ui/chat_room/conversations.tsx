@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useChatRoom } from "@/components/providers/chat_room_provider";
 import ChatMessageUI from "./conversations/chat_message_ui";
 import ChatMessage from "@/lib/chat/chat_message";
+import { IconArrowDown } from "@tabler/icons-react";
 
 export default function Conversations() {
   const chat_room = useChatRoom();
@@ -23,14 +24,23 @@ export default function Conversations() {
     };
   }, [chat_room]);
   return (
-    <div className="mb-100">
-      {conversations_value.map((conversation, index) => (
-        <ChatMessageUI
-          key={index}
-          role={conversation.role}
-          message={conversation.content}
-        />
-      ))}
+    <div>
+      <div className="mb-100">
+        {conversations_value.map((conversation, index) => (
+          <ChatMessageUI
+            key={index}
+            role={conversation.role}
+            message={conversation.content}
+          />
+        ))}
+      </div>
+      <div className="fixed bottom-0 right-0 pr-15 pb-25">
+        <button className="border-2 rounded-full cursor-pointer transition-colors hover:bg-gray-900 hover:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-900 active:scale-90">
+          <div className="m-2">
+            <IconArrowDown />
+          </div>
+        </button>
+      </div>
     </div>
   );
 }
