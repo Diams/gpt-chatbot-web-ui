@@ -10,4 +10,8 @@ export default class ChatRoom {
   get Conversations() {
     return this.conversations;
   }
+
+  public Chat(prompt: string) {
+    console.log(prompt);
+  }
 }
