@@ -21,7 +21,7 @@ export default function Conversations() {
     return () => {
       chat_room.off("added_conversation", added_conversation_listener);
     };
-  }, []);
+  }, [chat_room]);
   return (
     <div>
       {conversations_value.map((conversation, index) => (
