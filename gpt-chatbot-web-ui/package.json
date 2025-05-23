@@ -12,13 +12,19 @@
     "@tabler/icons-react": "^3.33.0",
     "i18next": "^25.2.0",
     "i18next-resources-to-backend": "^1.2.1",
+    "katex": "^0.16.22",
     "negotiator": "^1.0.0",
     "next": "15.3.2",
     "openai": "^4.103.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-i18next": "^15.5.1",
-    "react-textarea-autosize": "^8.5.9"
+    "react-markdown": "^10.1.0",
+    "react-textarea-autosize": "^8.5.9",
+    "rehype-katex": "^7.0.1",
+    "rehype-sanitize": "^6.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
