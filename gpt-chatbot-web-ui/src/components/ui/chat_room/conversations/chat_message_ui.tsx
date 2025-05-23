@@ -17,7 +17,7 @@ export default function ChatMessageUI({
             <div>
               <IconUser size={30} />
             </div>
-            <div>{message}</div>
+            <div className="whitespace-pre-wrap">{message}</div>
           </div>
         </div>
       ) : (
@@ -26,7 +26,7 @@ export default function ChatMessageUI({
             <div>
               <IconRobot size={30} />
             </div>
-            <div>{message}</div>
+            <div className="whitespace-pre-wrap">{message}</div>
           </div>
         </div>
       )}
