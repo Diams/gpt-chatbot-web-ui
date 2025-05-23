@@ -13,7 +13,6 @@ export default function ChatInput() {
   const handle_send = () => {
     if (input_value !== "") {
       chat_room.Chat(input_value);
-      console.log(chat_room.Conversations);
       set_input("");
     }
   };
