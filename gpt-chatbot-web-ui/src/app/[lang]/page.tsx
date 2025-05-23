@@ -1,7 +1,7 @@
 import TranslationsProvider from "@/components/providers/translations_provider";
 import ChatInput from "@/components/ui/chat_input";
 import Conversations from "@/components/ui/conversations";
-import { initTranslations } from "@/lib/i18n";
+import { initTranslations } from "@/lib/localization/i18n";
 
 type HomePagePromiseProps = {
   lang: string;

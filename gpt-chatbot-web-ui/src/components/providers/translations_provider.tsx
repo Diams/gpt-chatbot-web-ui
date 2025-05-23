@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 import { I18nextProvider } from "react-i18next";
-import { initTranslations } from "@/lib/i18n_client";
+import { initTranslations } from "@/lib/localization/i18n_client";
 import { createInstance, i18n, Resource } from "i18next";
 
 interface TranslationsProviderProps {

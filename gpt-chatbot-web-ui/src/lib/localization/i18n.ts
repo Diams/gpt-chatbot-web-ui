@@ -1,15 +1,18 @@
 import { createInstance, i18n, Resource } from "i18next";
 import { initReactI18next } from "react-i18next/initReactI18next";
-import { i18nConfig } from "../../i18n_config";
+import resourcesToBackend from "i18next-resources-to-backend";
+import { i18nConfig } from "../../../i18n_config";
+import path from "path";
+import { promises as fs } from "fs";
 
 type InitTranslationsParams = {
   locale: string; // 現在のロケール
   namespaces: string[]; // ロードしたい名前空間
   i18nInstance?: i18n; // すでに生成済みの i18n インスタンス (クライアント用)
-  resources: Resource; // 既にサーバーから受け取った翻訳リソース
+  resources?: Resource; // 既にサーバーから受け取った翻訳リソース
 };
 
-export function initTranslations({
+export async function initTranslations({
   locale,
   namespaces,
   i18nInstance,
@@ -21,9 +24,26 @@ export function initTranslations({
   // i18next に react-i18next を組み込む
   instance.use(initReactI18next);
 
+  // サーバー側でJSONを動的読み込みするための設定
+  if (!resources) {
+    instance.use(
+      resourcesToBackend(async (language: string, namespace: string) => {
+        const filePath = path.join(
+          process.cwd(),
+          "public",
+          "locales",
+          language,
+          `${namespace}.json`
+        );
+        const json = await fs.readFile(filePath, "utf-8");
+        return JSON.parse(json);
+      })
+    );
+  }
+
   // i18n初期化
   if (!instance.isInitialized) {
-    instance.init({
+    await instance.init({
       lng: locale,
       resources,
       fallbackLng: i18nConfig.defaultLocale,
