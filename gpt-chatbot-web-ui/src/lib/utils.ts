@@ -3,6 +3,10 @@ export function GetExtension(langueage: string): string {
   switch (langueage) {
     case "bash":
       return "sh";
+    case "css":
+      return "css";
+    case "html":
+      return "html";
     case "jsx":
       return "jsx";
     case "python":
