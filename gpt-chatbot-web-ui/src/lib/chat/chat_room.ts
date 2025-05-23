@@ -30,6 +30,10 @@ export default class ChatRoom extends EventEmitter {
       }
       counter++;
     }
+    this.emit(
+      "completed_chat",
+      this.conversations[this.conversations.length - 1]
+    );
   }
 
   private AddConversation(role: string, message: string) {
