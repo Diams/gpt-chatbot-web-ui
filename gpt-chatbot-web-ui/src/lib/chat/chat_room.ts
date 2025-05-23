@@ -1,5 +1,6 @@
 import { EventEmitter } from "events";
 import ChatMessage from "./chat_message";
+import { Request } from "@/lib/models/openai/gpt-4o";
 
 export default class ChatRoom extends EventEmitter {
   private conversations: ChatMessage[];
@@ -15,8 +16,8 @@ export default class ChatRoom extends EventEmitter {
 
   public async Chat(prompt: string) {
     this.AddConversation("user", prompt);
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    this.AddConversation("assistant", "Answer from some GPT model.");
+    const answer = await Request(prompt);
+    this.AddConversation("assistant", answer);
   }
 
   private AddConversation(role: string, message: string) {
