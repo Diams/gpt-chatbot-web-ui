@@ -71,6 +71,7 @@ export default function Conversations() {
     ...chat_room.Conversations,
   ]);
   const bottom_item = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     const added_conversation_listener = ProvideAddedConversationListener(
       set_conversations,

@@ -2,16 +2,29 @@ import ChatMessage from "./chat_message";
 
 export default class ChatHistoryManager {
   private selected_chat_id: string;
+  private is_initialized: boolean;
 
   constructor() {
-    this.selected_chat_id = this.GenerateNewChatId(); // TODO(daimon): あとでちゃんとLoadLatestSavedChatId()を呼ぶ
+    this.selected_chat_id = "";
+    this.is_initialized = false;
   }
 
   get SelectedChatId(): string {
     return this.selected_chat_id;
   }
 
+  public Initialize(): void {
+    if (this.is_initialized) {
+      return;
+    }
+    this.selected_chat_id = this.LoadLatestSavedChatId();
+    this.is_initialized = true;
+  }
+
   public SaveConversations(conversations: ChatMessage[]): void {
+    if (!this.is_initialized || !this.selected_chat_id) {
+      throw new Error("ChatHistoryManager is not initialized.");
+    }
     const selected_id = this.SelectedChatId;
     const conversations_json = JSON.stringify(conversations);
     localStorage.setItem(`chat_history/${selected_id}`, conversations_json);
