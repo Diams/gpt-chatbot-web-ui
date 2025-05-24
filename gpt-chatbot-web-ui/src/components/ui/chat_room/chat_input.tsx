@@ -4,7 +4,7 @@ import { IconSend, IconSendOff } from "@tabler/icons-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import TextareaAutosize from "react-textarea-autosize";
-import { useChatRoom } from "@/components/providers/chat_room_provider";
+import { useChatRoom } from "@/components/providers/context_providers/chat_room_provider";
 
 export default function ChatInput() {
   const { t } = useTranslation();

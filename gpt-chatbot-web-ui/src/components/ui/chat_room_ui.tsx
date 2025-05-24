@@ -1,6 +1,6 @@
 "use client";
 
-import ChatRoomProvider from "@/components/providers/chat_room_provider";
+import ChatRoomProvider from "@/components/providers/context_providers/chat_room_provider";
 import ChatRoom from "@/lib/chat/chat_room";
 import ChatInput from "./chat_room/chat_input";
 import Conversations from "./chat_room/conversations";
