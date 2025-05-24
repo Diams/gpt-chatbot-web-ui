@@ -1,7 +1,7 @@
 import ChatHistoryManagerProvider from "@/components/providers/context_providers/chat_history_manager_provider";
 import TranslationsProvider from "@/components/providers/translations_provider";
-import ChatHistorySidebar from "@/components/ui/chat_history_sidebar";
-import ChatRoomUI from "@/components/ui/chat_room_ui";
+import ChatHistorySidebar from "@/components/ui/chatbot/chat_history_sidebar";
+import ChatRoomUI from "@/components/ui/chatbot/chat_room_ui";
 import { initTranslations } from "@/lib/localization/i18n";
 
 type HomePagePromiseProps = {
