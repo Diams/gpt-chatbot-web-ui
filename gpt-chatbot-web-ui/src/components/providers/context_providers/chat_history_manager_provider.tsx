@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, ReactNode } from "react";
+import { createContext, useContext, useRef, ReactNode } from "react";
 import ChatHistoryManager from "@/lib/chat/chat_history_manager";
 
 const ChatHistoryManagerContext = createContext<ChatHistoryManager | null>(
@@ -9,13 +9,17 @@ const ChatHistoryManagerContext = createContext<ChatHistoryManager | null>(
 
 export default function ChatHistoryManagerProvider({
   children,
-  chat_history_manager_instance,
 }: {
   children: ReactNode;
-  chat_history_manager_instance: ChatHistoryManager;
 }) {
+  const chat_history_manager_ref = useRef<ChatHistoryManager | null>(null);
+  if (!chat_history_manager_ref.current) {
+    chat_history_manager_ref.current = new ChatHistoryManager();
+  }
   return (
-    <ChatHistoryManagerContext.Provider value={chat_history_manager_instance}>
+    <ChatHistoryManagerContext.Provider
+      value={chat_history_manager_ref.current}
+    >
       {children}
     </ChatHistoryManagerContext.Provider>
   );
