@@ -9,8 +9,10 @@ export default function ChatRoomUI() {
   const chat_room = new ChatRoom([]);
   return (
     <ChatRoomProvider chat_room_instance={chat_room}>
-      <Conversations />
-      <ChatInput />
+      <div className="flex flex-col w-full h-full">
+        <Conversations />
+        <ChatInput />
+      </div>
     </ChatRoomProvider>
   );
 }
