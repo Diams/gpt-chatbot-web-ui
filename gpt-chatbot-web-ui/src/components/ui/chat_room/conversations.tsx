@@ -87,18 +87,20 @@ export default function Conversations() {
     handle_scroll_button();
   }, [conversations_value]);
   return (
-    <div>
-      <div className="mb-100">
-        {conversations_value.map((conversation, index) => (
-          <ChatMessageUI
-            key={index}
-            role={conversation.role}
-            message={conversation.content}
-          />
-        ))}
+    <div className="flex flex-grow overflow-hidden relative">
+      <div className="w-full h-full overflow-auto">
+        <div className="mb-100">
+          {conversations_value.map((conversation, index) => (
+            <ChatMessageUI
+              key={index}
+              role={conversation.role}
+              message={conversation.content}
+            />
+          ))}
+        </div>
+        <div ref={bottom_item}></div>
       </div>
-      <div ref={bottom_item}></div>
-      <div className="fixed bottom-0 right-0 pr-15 pb-25">
+      <div className="absolute bottom-2 right-4">
         <button
           onClick={handle_scroll_button}
           className="border-2 rounded-full cursor-pointer transition-colors hover:bg-gray-900 hover:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-900 active:scale-90"
