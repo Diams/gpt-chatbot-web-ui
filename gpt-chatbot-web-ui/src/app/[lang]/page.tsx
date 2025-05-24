@@ -19,13 +19,13 @@ export default async function Home(props: HomePageProps) {
     namespaces,
   });
   return (
-    <main>
+    <main className="w-screen h-screen">
       <TranslationsProvider
         locale={lang}
         namespaces={namespaces}
         resources={resources}
       >
-        <div className="flex flex-row h-screen">
+        <div className="flex flex-row max-w-full max-h-full w-full h-full overflow-hidden">
           <ChatHistorySidebar />
           <ChatRoomUI />
         </div>
