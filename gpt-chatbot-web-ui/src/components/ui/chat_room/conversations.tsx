@@ -1,7 +1,7 @@
 "use client";
 
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
-import { useChatRoom } from "@/components/providers/chat_room_provider";
+import { useChatRoom } from "@/components/providers/context_providers/chat_room_provider";
 import ChatMessageUI from "./conversations/chat_message_ui";
 import ChatMessage from "@/lib/chat/chat_message";
 import { IconArrowDown } from "@tabler/icons-react";
