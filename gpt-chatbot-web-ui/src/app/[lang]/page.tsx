@@ -25,7 +25,7 @@ export default async function Home(props: HomePageProps) {
         namespaces={namespaces}
         resources={resources}
       >
-        <div className="flex flex-col md:flex-row max-w-full max-h-full w-full h-full overflow-hidden">
+        <div className="flex flex-row max-w-full max-h-full w-full h-full overflow-hidden">
           <ChatHistorySidebar />
           <ChatRoomUI />
         </div>
