@@ -89,7 +89,7 @@ export default function Conversations() {
   return (
     <div className="flex flex-grow overflow-hidden relative">
       <div className="w-full h-full overflow-auto">
-        <div className="mb-100">
+        <div className="">
           {conversations_value.map((conversation, index) => (
             <ChatMessageUI
               key={index}
