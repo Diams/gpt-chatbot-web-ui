@@ -39,6 +39,32 @@ export default class ChatHistoryManager {
     const conversations_json = JSON.stringify(conversations);
     localStorage.setItem(`chat_history/${selected_id}`, conversations_json);
     localStorage.setItem("latest_saved_chat_id", selected_id);
+    if (!this.ChatHistoryExists(selected_id)) {
+      const chat_histories = this.LoadAllChatHistories();
+      const new_chat_histories = [
+        ...chat_histories,
+        { chat_id: selected_id, title: conversations[0].content },
+      ];
+      localStorage.setItem(
+        "chat_histories",
+        JSON.stringify(new_chat_histories)
+      );
+    }
+  }
+
+  public LoadAllChatHistories(): { chat_id: string; title: string }[] {
+    if (!this.is_initialized) {
+      throw new Error("ChatHistoryManager is not initialized.");
+    }
+    const chat_histories_json: string | null =
+      localStorage.getItem("chat_histories");
+    if (chat_histories_json) {
+      return JSON.parse(chat_histories_json) as {
+        chat_id: string;
+        title: string;
+      }[];
+    }
+    return [];
   }
 
   private LoadLatestSavedChatId(): string {
@@ -69,5 +95,13 @@ export default class ChatHistoryManager {
       new_chat_id += chars[index];
     }
     return new_chat_id;
+  }
+
+  private ChatHistoryExists(selected_id: string): boolean {
+    const chat = localStorage.getItem(`chat_history/${selected_id}`);
+    if (chat) {
+      return true;
+    }
+    return false;
   }
 }
