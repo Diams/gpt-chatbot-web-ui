@@ -67,6 +67,8 @@ export default class ChatHistoryManager {
     return [];
   }
 
+  public CreateNewChatHistory(): void {}
+
   private LoadLatestSavedChatId(): string {
     const latest_saved_chat_id = localStorage.getItem("latest_saved_chat_id");
     if (latest_saved_chat_id) {
