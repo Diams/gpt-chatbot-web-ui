@@ -77,7 +77,6 @@ export default class ChatHistoryManager extends EventEmitter {
   public CreateNewChatHistory(): void {
     const new_chat_id = this.GenerateNewChatId();
     this.SelectedChatId = new_chat_id;
-    console.log(new_chat_id);
   }
 
   private LoadLatestSavedChatId(): string {
