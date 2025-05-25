@@ -13,6 +13,16 @@ export default class ChatHistoryManager {
     return this.selected_chat_id;
   }
 
+  get SelectedConversations(): ChatMessage[] {
+    const conversations_json = localStorage.getItem(
+      `chat_history/${this.selected_chat_id}`
+    );
+    if (conversations_json) {
+      return JSON.parse(conversations_json) as ChatMessage[];
+    }
+    return [];
+  }
+
   public Initialize(): void {
     if (this.is_initialized) {
       return;

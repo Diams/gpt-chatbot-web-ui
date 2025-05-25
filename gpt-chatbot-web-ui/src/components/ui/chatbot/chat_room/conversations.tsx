@@ -86,6 +86,7 @@ export default function Conversations() {
       chat_history_manager
     );
     chat_room.on("completed_chat", completed_chat_listener);
+    set_conversations([...chat_room.Conversations]);
     return () => {
       chat_room.off("added_conversation", added_conversation_listener);
       chat_room.off("updated_conversation", updated_conversation_listener);
