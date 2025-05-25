@@ -42,20 +42,18 @@ export default class ChatHistoryManager {
   }
 
   public LoadAllChatHistories(): { chat_id: string; title: string }[] {
-    return [
-      {
-        chat_id: "dummy 1",
-        title: "dummy 1",
-      },
-      {
-        chat_id: "dummy 2",
-        title: "dummy 2",
-      },
-      {
-        chat_id: "dummy 3",
-        title: "dummy 3",
-      },
-    ];
+    if (!this.is_initialized) {
+      throw new Error("ChatHistoryManager is not initialized.");
+    }
+    const chat_histories_json: string | null =
+      localStorage.getItem("chat_histories");
+    if (chat_histories_json) {
+      return JSON.parse(chat_histories_json) as {
+        chat_id: string;
+        title: string;
+      }[];
+    }
+    return [];
   }
 
   private LoadLatestSavedChatId(): string {
