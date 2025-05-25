@@ -41,6 +41,23 @@ export default class ChatHistoryManager {
     localStorage.setItem("latest_saved_chat_id", selected_id);
   }
 
+  public LoadAllChatHistories(): { chat_id: string; title: string }[] {
+    return [
+      {
+        chat_id: "dummy 1",
+        title: "dummy 1",
+      },
+      {
+        chat_id: "dummy 2",
+        title: "dummy 2",
+      },
+      {
+        chat_id: "dummy 3",
+        title: "dummy 3",
+      },
+    ];
+  }
+
   private LoadLatestSavedChatId(): string {
     const latest_saved_chat_id = localStorage.getItem("latest_saved_chat_id");
     if (latest_saved_chat_id) {
