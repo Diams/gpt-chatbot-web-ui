@@ -92,7 +92,7 @@ export default function Conversations() {
       chat_room.off("updated_conversation", updated_conversation_listener);
       chat_room.off("completed_chat", completed_chat_listener);
     };
-  }, [chat_room]);
+  }, [chat_room, chat_history_manager]);
   const handle_scroll_button = () => {
     bottom_item.current?.scrollIntoView({ behavior: "smooth" });
   };
