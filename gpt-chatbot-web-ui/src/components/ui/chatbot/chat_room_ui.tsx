@@ -35,7 +35,7 @@ export default function ChatRoomUI() {
         seleceted_chat_id_changed_listener
       );
     };
-  }, []);
+  }, [chat_history_manager]);
   return (
     <ChatRoomProvider chat_room_instance={chat_room}>
       <div className="flex flex-col w-full h-full">
