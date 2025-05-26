@@ -44,8 +44,6 @@ export default class ChatHistoryManager extends EventEmitter {
     }
     const selected_id = this.SelectedChatId;
     const conversations_json = JSON.stringify(conversations);
-    localStorage.setItem(`chat_history/${selected_id}`, conversations_json);
-    localStorage.setItem("latest_saved_chat_id", selected_id);
     if (!this.ChatHistoryExists(selected_id)) {
       const chat_histories = this.LoadAllChatHistories();
       const new_chat_histories = [
@@ -57,6 +55,8 @@ export default class ChatHistoryManager extends EventEmitter {
         JSON.stringify(new_chat_histories)
       );
     }
+    localStorage.setItem(`chat_history/${selected_id}`, conversations_json);
+    localStorage.setItem("latest_saved_chat_id", selected_id);
   }
 
   public LoadAllChatHistories(): { chat_id: string; title: string }[] {
