@@ -1,16 +1,23 @@
+import { EventEmitter } from "events";
 import ChatMessage from "./chat_message";
 
-export default class ChatHistoryManager {
+export default class ChatHistoryManager extends EventEmitter {
   private selected_chat_id: string;
   private is_initialized: boolean;
 
   constructor() {
+    super();
     this.selected_chat_id = "";
     this.is_initialized = false;
   }
 
   get SelectedChatId(): string {
     return this.selected_chat_id;
+  }
+
+  set SelectedChatId(chat_id: string) {
+    this.selected_chat_id = chat_id;
+    this.emit("selected_chat_id_changed", chat_id);
   }
 
   get SelectedConversations(): ChatMessage[] {
@@ -65,6 +72,11 @@ export default class ChatHistoryManager {
       }[];
     }
     return [];
+  }
+
+  public CreateNewChatHistory(): void {
+    const new_chat_id = this.GenerateNewChatId();
+    this.SelectedChatId = new_chat_id;
   }
 
   private LoadLatestSavedChatId(): string {

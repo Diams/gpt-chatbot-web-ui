@@ -12,7 +12,7 @@ type HomePageProps = {
 
 export default async function Home(props: HomePageProps) {
   const { lang } = await props.params;
-  const namespaces = ["chat_room"];
+  const namespaces = ["chat_room", "chat_history_sidebar"];
   const { resources } = await initTranslations({
     locale: lang,
     namespaces,
