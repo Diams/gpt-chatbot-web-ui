@@ -12,7 +12,7 @@ function ProvideSelectedChatIdChangedListener(
   chat_room_setter: Dispatch<SetStateAction<ChatRoom>>,
   chat_history_manager: ChatHistoryManager
 ): (chat_id: string) => void {
-  return (chat_id: string) => {
+  return (_: string) => {
     chat_room_setter(new ChatRoom(chat_history_manager.SelectedConversations));
   };
 }
