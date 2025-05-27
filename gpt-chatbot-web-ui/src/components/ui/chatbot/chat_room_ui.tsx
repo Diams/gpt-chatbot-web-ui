@@ -11,8 +11,8 @@ import ChatHistoryManager from "@/lib/chat/chat_history_manager";
 function ProvideSelectedChatIdChangedListener(
   chat_room_setter: Dispatch<SetStateAction<ChatRoom>>,
   chat_history_manager: ChatHistoryManager
-): (chat_id: string) => void {
-  return (_: string) => {
+): () => void {
+  return () => {
     chat_room_setter(new ChatRoom(chat_history_manager.SelectedConversations));
   };
 }
