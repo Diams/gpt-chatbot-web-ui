@@ -50,10 +50,7 @@ export default class ChatHistoryManager extends EventEmitter {
         ...chat_histories,
         { chat_id: selected_id, title: conversations[0].content },
       ];
-      localStorage.setItem(
-        "chat_histories",
-        JSON.stringify(new_chat_histories)
-      );
+      this.UpdateChatHistories(new_chat_histories);
     }
     localStorage.setItem(`chat_history/${selected_id}`, conversations_json);
     localStorage.setItem("latest_saved_chat_id", selected_id);
@@ -115,5 +112,12 @@ export default class ChatHistoryManager extends EventEmitter {
       return true;
     }
     return false;
+  }
+
+  private UpdateChatHistories(
+    new_chat_histories: { chat_id: string; title: string }[]
+  ): void {
+    localStorage.setItem("chat_histories", JSON.stringify(new_chat_histories));
+    this.emit("chat_histories_updated", new_chat_histories);
   }
 }
