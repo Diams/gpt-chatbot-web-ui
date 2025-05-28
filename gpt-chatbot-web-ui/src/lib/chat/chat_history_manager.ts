@@ -44,7 +44,19 @@ export default class ChatHistoryManager extends EventEmitter {
     }
     const selected_id = this.SelectedChatId;
     const conversations_json = JSON.stringify(conversations);
-    if (!this.ChatHistoryExists(selected_id)) {
+    if (this.ChatHistoryExists(selected_id)) {
+      const chat_histories = this.LoadAllChatHistories();
+      if ([...chat_histories].reverse()[0].chat_id !== selected_id) {
+        const updated_chat_histories = chat_histories.filter(
+          (chat) => chat.chat_id !== selected_id
+        );
+        const new_chat_history = [
+          ...updated_chat_histories,
+          { chat_id: selected_id, title: conversations[0].content },
+        ];
+        this.UpdateChatHistories(new_chat_history);
+      }
+    } else {
       const chat_histories = this.LoadAllChatHistories();
       const new_chat_histories = [
         ...chat_histories,
