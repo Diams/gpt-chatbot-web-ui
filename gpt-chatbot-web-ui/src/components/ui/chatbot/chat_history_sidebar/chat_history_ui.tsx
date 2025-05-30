@@ -17,21 +17,33 @@ export default function ChatHistoryUI({
   const [is_editing, set_is_editing] = useState(false);
   return (
     <div className="flex flex-row w-full pl-4 pr-2 py-2 gap-3 hover:bg-gray-300 dark:hover:bg-gray-500">
-      <button
-        onClick={() => {
-          if (onClicked) {
-            onClicked();
-          }
-        }}
-        className="flex flex-grow flex-row gap-3 min-w-0 active:scale-90"
-      >
-        <div className="shrink">
-          <IconMessage />
+      {is_editing ? (
+        <div className="flex flex-grow flex-row gap-3 min-w-0">
+          <div className="shrink">
+            <IconMessage />
+          </div>
+          <input
+            className="w-full bg-neutral-300 text-neutral-900 border-2 rounded-md"
+            defaultValue={title}
+          ></input>
         </div>
-        <div className="whitespace-nowrap overflow-hidden text-ellipsis min-w-0">
-          {title}
-        </div>
-      </button>
+      ) : (
+        <button
+          onClick={() => {
+            if (onClicked) {
+              onClicked();
+            }
+          }}
+          className="flex flex-grow flex-row gap-3 min-w-0 active:scale-90"
+        >
+          <div className="shrink">
+            <IconMessage />
+          </div>
+          <div className="whitespace-nowrap overflow-hidden text-ellipsis min-w-0">
+            {title}
+          </div>
+        </button>
+      )}
       {is_editing ? (
         <button className="shrink dark:hover:text-green-300 hover:text-blue-600 active:scale-90">
           <IconCheck />
