@@ -47,7 +47,7 @@ export default function ChatHistorySidebar() {
       <hr className="border-t w-[90%] my-6 border-gray-500" />
       {[...chat_histories].reverse().map((chat_history, index) => (
         <ChatHistoryUI
-          key={index}
+          key={chat_history.chat_id}
           chat_id={chat_history.chat_id}
           title={chat_history.title}
           onClicked={() =>
