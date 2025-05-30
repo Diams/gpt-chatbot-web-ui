@@ -3,12 +3,36 @@ import OpenAI from "openai";
 import { OpenAiApiKey } from "@/lib/models/api_key_provider";
 import { Stream } from "openai/streaming.mjs";
 
-const client = new OpenAI({ apiKey: OpenAiApiKey });
+interface ChatCompletionProps {
+  provider: string;
+  model: string;
+}
 
-export async function POST(request: NextRequest): Promise<Response> {
+export async function POST(
+  request: NextRequest,
+  context?: { params?: Promise<ChatCompletionProps> }
+): Promise<Response> {
   const { messages } = await request.json();
+  // provider/modelをcontextから取得（awaitが必要）
+  const params = context?.params
+    ? await context.params
+    : { provider: "openai", model: "gpt-4o" };
+  const provider = params.provider || "openai";
+  let client = null;
+  if (provider === "openai") {
+    client = new OpenAI({ apiKey: OpenAiApiKey });
+  }
+  if (!client) {
+    return new Response("Unsupported provider", {
+      status: 400,
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+      },
+    });
+  }
+  const model = params.model || "gpt-4o";
   const completion = await client.chat.completions.create({
-    model: "gpt-4o",
+    model: model,
     messages: messages,
     stream: true,
   });
