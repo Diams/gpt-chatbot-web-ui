@@ -40,7 +40,9 @@ export default function ChatRoomUI() {
   return (
     <ChatRoomProvider chat_room_instance={chat_room}>
       <div className="flex flex-col w-full h-full">
-        <ChatHistoryHeader />
+        <div className="md:hidden">
+          <ChatHistoryHeader />
+        </div>
         <Conversations />
         <ChatInput />
       </div>
