@@ -47,7 +47,7 @@ export default function ChatHistorySidebar() {
       <hr className="border-t w-[90%] my-6 border-gray-500" />
       <div className="flex w-full pb-2 overflow-hidden">
         <div className="flex flex-col w-full overflow-auto">
-          {[...chat_histories].reverse().map((chat_history, index) => (
+          {[...chat_histories].reverse().map((chat_history) => (
             <ChatHistoryUI
               key={chat_history.chat_id}
               chat_id={chat_history.chat_id}
