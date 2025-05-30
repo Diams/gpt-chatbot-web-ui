@@ -47,7 +47,12 @@ export default function ChatHistoryUI({
         </button>
       )}
       {is_editing ? (
-        <div className="shrink dark:hover:text-red-500 hover:text-blue-600 active:scale-90">
+        <div
+          onClick={() => {
+            set_is_editing(false);
+          }}
+          className="shrink dark:hover:text-red-500 hover:text-blue-600 active:scale-90"
+        >
           <IconX />
         </div>
       ) : (
