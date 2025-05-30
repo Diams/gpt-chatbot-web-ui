@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useChatHistoryManager } from "@/components/providers/context_providers/chat_history_manager_provider";
 import ChatRoomProvider from "@/components/providers/context_providers/chat_room_provider";
 import ChatRoom from "@/lib/chat/chat_room";
+import ChatHistoryHeader from "./chat_room/chat_history_header";
 import ChatInput from "./chat_room/chat_input";
 import Conversations from "./chat_room/conversations";
 import ChatHistoryManager from "@/lib/chat/chat_history_manager";
@@ -39,6 +40,9 @@ export default function ChatRoomUI() {
   return (
     <ChatRoomProvider chat_room_instance={chat_room}>
       <div className="flex flex-col w-full h-full">
+        <div className="md:hidden">
+          <ChatHistoryHeader />
+        </div>
         <Conversations />
         <ChatInput />
       </div>
