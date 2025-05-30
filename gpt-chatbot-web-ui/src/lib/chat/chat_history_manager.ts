@@ -105,6 +105,31 @@ export default class ChatHistoryManager extends EventEmitter {
     );
   }
 
+  // チャット履歴を削除する関数
+  public DeleteChatHistory(chat_id: string): void {
+    if (!this.is_initialized) {
+      throw new Error("ChatHistoryManager is not initialized.");
+    }
+    // 履歴本体を削除
+    localStorage.removeItem(`chat_history/${chat_id}`);
+    // 履歴リストから削除
+    const chat_histories = this.LoadAllChatHistories();
+    const updated_chat_histories = chat_histories.filter(
+      (chat) => chat.chat_id !== chat_id
+    );
+    this.UpdateChatHistories(updated_chat_histories);
+    // 選択中のチャットIDが削除対象ならリセット
+    if (this.selected_chat_id === chat_id) {
+      if (updated_chat_histories.length > 0) {
+        this.SelectedChatId =
+          updated_chat_histories[updated_chat_histories.length - 1].chat_id;
+      } else {
+        this.SelectedChatId = this.GenerateNewChatId();
+      }
+      localStorage.setItem("latest_saved_chat_id", this.selected_chat_id);
+    }
+  }
+
   private LoadLatestSavedChatId(): string {
     const latest_saved_chat_id = localStorage.getItem("latest_saved_chat_id");
     if (latest_saved_chat_id) {
