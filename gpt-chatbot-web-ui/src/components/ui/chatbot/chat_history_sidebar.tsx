@@ -48,6 +48,7 @@ export default function ChatHistorySidebar() {
       {[...chat_histories].reverse().map((chat_history, index) => (
         <ChatHistoryUI
           key={index}
+          chat_id={chat_history.chat_id}
           title={chat_history.title}
           onClicked={() =>
             (chat_history_manager.SelectedChatId = chat_history.chat_id)

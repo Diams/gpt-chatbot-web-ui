@@ -88,6 +88,23 @@ export default class ChatHistoryManager extends EventEmitter {
     this.SelectedChatId = new_chat_id;
   }
 
+  public UpdateTitle(chat_id: string, new_title: string): void {
+    if (!this.is_initialized) {
+      throw new Error("ChatHistoryManager is not initialized.");
+    }
+    const chat_histories = this.LoadAllChatHistories();
+    const updated_chat_histories = chat_histories.map((chat) => {
+      if (chat.chat_id === chat_id) {
+        return { chat_id, title: new_title };
+      }
+      return chat;
+    });
+    localStorage.setItem(
+      "chat_histories",
+      JSON.stringify(updated_chat_histories)
+    );
+  }
+
   private LoadLatestSavedChatId(): string {
     const latest_saved_chat_id = localStorage.getItem("latest_saved_chat_id");
     if (latest_saved_chat_id) {
