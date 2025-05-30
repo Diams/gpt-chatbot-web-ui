@@ -6,6 +6,7 @@ import {
   IconTrash,
   IconX,
 } from "@tabler/icons-react";
+import { useChatHistoryManager } from "@/components/providers/context_providers/chat_history_manager_provider";
 
 export default function ChatHistoryUI({
   chat_id,
@@ -16,6 +17,7 @@ export default function ChatHistoryUI({
   title: string;
   onClicked?: () => void;
 }) {
+  const chat_history_manager = useChatHistoryManager();
   const [is_editing, set_is_editing] = useState(false);
   const [current_title, set_current_title] = useState(title);
   const [new_title, set_new_title] = useState(title);
@@ -23,6 +25,7 @@ export default function ChatHistoryUI({
     if (new_title.trim() === "") return;
     console.log("Saving new title:", new_title);
     set_current_title(new_title);
+    chat_history_manager.UpdateTitle(chat_id, new_title);
     set_is_editing(false);
   };
   return (
