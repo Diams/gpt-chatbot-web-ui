@@ -8,9 +8,11 @@ import {
 } from "@tabler/icons-react";
 
 export default function ChatHistoryUI({
+  chat_id,
   title,
   onClicked,
 }: {
+  chat_id: string;
   title: string;
   onClicked?: () => void;
 }) {
