@@ -14,7 +14,9 @@ export default function ChatHistoryHeader() {
     setChatHistories(chatHistoryManager.LoadAllChatHistories());
     setSelectedId(chatHistoryManager.SelectedChatId);
     // イベントリスナーで履歴更新に追従
-    const updateHandler = (newHistories: any) => {
+    const updateHandler = (
+      newHistories: { chat_id: string; title: string }[]
+    ) => {
       setChatHistories([...newHistories]);
     };
     const selectHandler = (id: string) => {
