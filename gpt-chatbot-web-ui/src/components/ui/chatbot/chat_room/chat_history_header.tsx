@@ -56,11 +56,14 @@ export default function ChatHistoryHeader() {
         <option value="default" disabled>
           チャット履歴を選択
         </option>
-        {chatHistories.map((history) => (
-          <option key={history.chat_id} value={history.chat_id}>
-            {history.title || history.chat_id}
-          </option>
-        ))}
+        {chatHistories
+          .slice()
+          .reverse()
+          .map((history) => (
+            <option key={history.chat_id} value={history.chat_id}>
+              {history.title || history.chat_id}
+            </option>
+          ))}
       </select>
     </div>
   );
