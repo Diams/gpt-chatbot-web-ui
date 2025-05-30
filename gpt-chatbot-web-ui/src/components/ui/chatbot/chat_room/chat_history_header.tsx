@@ -35,8 +35,7 @@ export default function ChatHistoryHeader() {
         className="flex-shrink-0 flex items-center justify-center border-1 rounded-xl w-10 h-10 hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 cursor-pointer active:scale-90"
         aria-label="Add New Chat"
         onClick={() => {
-          // New chat button click handler (to be implemented)
-          console.log("Plus button clicked");
+          chatHistoryManager.CreateNewChatHistory();
         }}
       >
         <IconPlus size={24} />
