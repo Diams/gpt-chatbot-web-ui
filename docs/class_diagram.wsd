@@ -1,0 +1,39 @@
+@startuml class_diagram
+
+class Chatbot {}
+class ChatHistoryManagerProvider {}
+class ChatHistorySidebar {}
+class ChatRoomUI {}
+class ChatRoomProvider {}
+class NewChat {}
+class ChatHistoryUI {}
+class Conversations {}
+class ChatInput {}
+class ChatMessageUI {}
+class ChatRoom {}
+class ChatHistoryManager {}
+
+Chatbot "1" *-- "1" ChatHistoryManagerProvider
+
+ChatHistoryManagerProvider "1" *-- "1" ChatHistorySidebar
+ChatHistoryManagerProvider "1" *-- "1" ChatRoomUI
+
+ChatHistorySidebar "1" *-- "1" NewChat
+ChatHistorySidebar "1" *-- "0..*" ChatHistoryUI
+ChatRoomUI "1" *-- "1" ChatRoomProvider
+
+ChatRoomProvider "1" *-- "1" Conversations
+ChatRoomProvider "1" *-- "1" ChatInput
+
+Conversations "1" *-- "0..*" ChatMessageUI
+
+ChatRoomUI "1" *----- "1" ChatRoom
+ChatHistoryManagerProvider *------ ChatHistoryManager
+ChatInput ---> ChatRoom: "Input user message."
+Conversations ---> ChatRoom: "Get conversations."
+Conversations ---> ChatHistoryManager: "Save conversation."
+ChatHistorySidebar -----> ChatHistoryManager: "Load all chat histories./\nSelect chat history./\nListen to chat ID list changes."
+NewChat ----> ChatHistoryManager: "Create new chat history."
+ChatRoomUI -----> ChatHistoryManager: "Listen to selected chat history changes."
+
+@enduml

@@ -1,6 +1,6 @@
 import TranslationsProvider from "@/components/providers/translations_provider";
-import ChatRoomUI from "@/components/ui/chat_room_ui";
 import { initTranslations } from "@/lib/localization/i18n";
+import Chatbot from "@/components/ui/chatbot";
 
 type HomePagePromiseProps = {
   lang: string;
@@ -12,19 +12,21 @@ type HomePageProps = {
 
 export default async function Home(props: HomePageProps) {
   const { lang } = await props.params;
-  const namespaces = ["chat_room"];
+  const namespaces = ["chat_room", "chat_history_sidebar"];
   const { resources } = await initTranslations({
     locale: lang,
     namespaces,
   });
   return (
-    <main>
+    <main className="w-screen h-screen">
       <TranslationsProvider
         locale={lang}
         namespaces={namespaces}
         resources={resources}
       >
-        <ChatRoomUI />
+        <div className="flex flex-row max-w-full max-h-full w-full h-full overflow-hidden min-w-0">
+          <Chatbot />
+        </div>
       </TranslationsProvider>
     </main>
   );
