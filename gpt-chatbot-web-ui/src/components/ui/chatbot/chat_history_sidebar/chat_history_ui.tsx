@@ -15,6 +15,11 @@ export default function ChatHistoryUI({
   onClicked?: () => void;
 }) {
   const [is_editing, set_is_editing] = useState(false);
+  const [new_title, set_new_title] = useState(title);
+  const handle_save = () => {
+    if (new_title.trim() === "") return;
+    console.log("Saving new title:", new_title);
+  };
   return (
     <div className="flex flex-row w-full pl-4 pr-2 py-2 gap-3 hover:bg-gray-300 dark:hover:bg-gray-500">
       {is_editing ? (
@@ -25,6 +30,9 @@ export default function ChatHistoryUI({
           <input
             className="w-full bg-neutral-300 text-neutral-900 border-2 rounded-md"
             defaultValue={title}
+            onChange={(e) => {
+              set_new_title(e.target.value);
+            }}
           ></input>
         </div>
       ) : (
@@ -45,7 +53,10 @@ export default function ChatHistoryUI({
         </button>
       )}
       {is_editing ? (
-        <button className="shrink dark:hover:text-green-300 hover:text-blue-600 active:scale-90">
+        <button
+          onClick={handle_save}
+          className="shrink dark:hover:text-green-300 hover:text-blue-600 active:scale-90"
+        >
           <IconCheck />
         </button>
       ) : (
