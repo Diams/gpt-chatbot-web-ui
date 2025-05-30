@@ -88,6 +88,8 @@ export default function ChatHistoryUI({
             if (is_editing) {
               set_new_title(current_title); // Reset to original title
               set_is_editing(false);
+            } else if (is_deleting) {
+              set_is_deleting(false);
             }
           }}
           className="shrink dark:hover:text-red-500 hover:text-blue-600 active:scale-90"
