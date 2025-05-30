@@ -29,10 +29,10 @@ export default function ChatHistoryHeader() {
   }, [chatHistoryManager]);
 
   return (
-    <div className="flex items-center justify-start px-4 py-2 border-b border-gray-200 dark:border-gray-700">
+    <div className="flex items-center justify-start px-4 py-2 border-b border-gray-200 dark:border-gray-700 gap-2">
       <button
         style={{ minWidth: 40, maxWidth: 40, width: 40 }}
-        className="flex items-center justify-center border-1 rounded-xl w-10 h-10 hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 cursor-pointer active:scale-90"
+        className="flex-shrink-0 flex items-center justify-center border-1 rounded-xl w-10 h-10 hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 cursor-pointer active:scale-90"
         aria-label="Add New Chat"
         onClick={() => {
           // New chat button click handler (to be implemented)
@@ -43,7 +43,7 @@ export default function ChatHistoryHeader() {
       </button>
       {/* プルダウンメニュー */}
       <select
-        className="ml-2 border rounded-xl px-2 py-1 h-10 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="flex-1 min-w-0 border rounded-xl px-2 py-1 h-10 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 truncate"
         aria-label="ChatHistory Dropdown"
         value={selectedId || "default"}
         onChange={(e) => {
