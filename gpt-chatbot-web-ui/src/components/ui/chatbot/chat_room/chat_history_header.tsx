@@ -1,6 +1,33 @@
 import { IconPlus } from "@tabler/icons-react";
+import { useEffect, useState } from "react";
+import { useChatHistoryManager } from "@/components/providers/context_providers/chat_history_manager_provider";
 
 export default function ChatHistoryHeader() {
+  const chatHistoryManager = useChatHistoryManager();
+  const [chatHistories, setChatHistories] = useState<
+    { chat_id: string; title: string }[]
+  >([]);
+  const [selectedId, setSelectedId] = useState<string>("");
+
+  useEffect(() => {
+    chatHistoryManager.Initialize();
+    setChatHistories(chatHistoryManager.LoadAllChatHistories());
+    setSelectedId(chatHistoryManager.SelectedChatId);
+    // イベントリスナーで履歴更新に追従
+    const updateHandler = (newHistories: any) => {
+      setChatHistories([...newHistories]);
+    };
+    const selectHandler = (id: string) => {
+      setSelectedId(id);
+    };
+    chatHistoryManager.on("chat_histories_updated", updateHandler);
+    chatHistoryManager.on("selected_chat_id_changed", selectHandler);
+    return () => {
+      chatHistoryManager.off("chat_histories_updated", updateHandler);
+      chatHistoryManager.off("selected_chat_id_changed", selectHandler);
+    };
+  }, [chatHistoryManager]);
+
   return (
     <div className="flex items-center justify-start px-4 py-2 border-b border-gray-200 dark:border-gray-700">
       <button
@@ -16,18 +43,22 @@ export default function ChatHistoryHeader() {
       {/* プルダウンメニュー */}
       <select
         className="ml-2 border rounded-xl px-2 py-1 h-10 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-        aria-label="Options Dropdown"
-        defaultValue="default"
+        aria-label="ChatHistory Dropdown"
+        value={selectedId || "default"}
         onChange={(e) => {
-          // プルダウン選択時の処理（必要に応じて実装）
-          console.log("Dropdown selected:", e.target.value);
+          const id = e.target.value;
+          setSelectedId(id);
+          chatHistoryManager.SelectedChatId = id;
         }}
       >
         <option value="default" disabled>
-          オプションを選択
+          チャット履歴を選択
         </option>
-        <option value="option1">オプション1</option>
-        <option value="option2">オプション2</option>
+        {chatHistories.map((history) => (
+          <option key={history.chat_id} value={history.chat_id}>
+            {history.title || history.chat_id}
+          </option>
+        ))}
       </select>
     </div>
   );
