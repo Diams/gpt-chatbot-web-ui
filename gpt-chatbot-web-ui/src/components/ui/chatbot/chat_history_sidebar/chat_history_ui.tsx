@@ -19,6 +19,7 @@ export default function ChatHistoryUI({
 }) {
   const chat_history_manager = useChatHistoryManager();
   const [is_editing, set_is_editing] = useState(false);
+  const [is_deleting, set_is_deleting] = useState(false);
   const [current_title, set_current_title] = useState(title);
   const [new_title, set_new_title] = useState(title);
   const handle_save = () => {
@@ -60,9 +61,13 @@ export default function ChatHistoryUI({
           </div>
         </button>
       )}
-      {is_editing ? (
+      {is_editing || is_deleting ? (
         <button
-          onClick={handle_save}
+          onClick={() => {
+            if (is_editing) {
+              handle_save();
+            }
+          }}
           className="shrink dark:hover:text-green-300 hover:text-blue-600 active:scale-90"
         >
           <IconCheck />
@@ -77,18 +82,25 @@ export default function ChatHistoryUI({
           <IconEdit />
         </button>
       )}
-      {is_editing ? (
+      {is_editing || is_deleting ? (
         <div
           onClick={() => {
-            set_new_title(current_title); // Reset to original title
-            set_is_editing(false);
+            if (is_editing) {
+              set_new_title(current_title); // Reset to original title
+              set_is_editing(false);
+            }
           }}
           className="shrink dark:hover:text-red-500 hover:text-blue-600 active:scale-90"
         >
           <IconX />
         </div>
       ) : (
-        <button className="shrink dark:hover:text-gray-700 hover:text-blue-600 active:scale-90">
+        <button
+          onClick={() => {
+            set_is_deleting(true);
+          }}
+          className="shrink dark:hover:text-gray-700 hover:text-blue-600 active:scale-90"
+        >
           <IconTrash />
         </button>
       )}

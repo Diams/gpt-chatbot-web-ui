@@ -45,16 +45,20 @@ export default function ChatHistorySidebar() {
     <div className="flex flex-col w-full h-full pt-6 bg-white dark:bg-gray-900 shadow-2xl items-center">
       <NewChat />
       <hr className="border-t w-[90%] my-6 border-gray-500" />
-      {[...chat_histories].reverse().map((chat_history, index) => (
-        <ChatHistoryUI
-          key={chat_history.chat_id}
-          chat_id={chat_history.chat_id}
-          title={chat_history.title}
-          onClicked={() =>
-            (chat_history_manager.SelectedChatId = chat_history.chat_id)
-          }
-        />
-      ))}
+      <div className="flex w-full pb-2 overflow-hidden">
+        <div className="flex flex-col w-full overflow-auto">
+          {[...chat_histories].reverse().map((chat_history, index) => (
+            <ChatHistoryUI
+              key={chat_history.chat_id}
+              chat_id={chat_history.chat_id}
+              title={chat_history.title}
+              onClicked={() =>
+                (chat_history_manager.SelectedChatId = chat_history.chat_id)
+              }
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
