@@ -66,6 +66,9 @@ export default function ChatHistoryUI({
           onClick={() => {
             if (is_editing) {
               handle_save();
+            } else if (is_deleting) {
+              chat_history_manager.DeleteChatHistory(chat_id);
+              set_is_deleting(false);
             }
           }}
           className="shrink dark:hover:text-green-300 hover:text-blue-600 active:scale-90"
