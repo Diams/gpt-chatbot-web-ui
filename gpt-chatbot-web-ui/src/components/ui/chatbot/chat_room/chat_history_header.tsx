@@ -1,8 +1,10 @@
 import { IconPlus } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useChatHistoryManager } from "@/components/providers/context_providers/chat_history_manager_provider";
 
 export default function ChatHistoryHeader() {
+  const { t } = useTranslation("chat_history_sidebar");
   const chatHistoryManager = useChatHistoryManager();
   const [chatHistories, setChatHistories] = useState<
     { chat_id: string; title: string }[]
@@ -54,7 +56,7 @@ export default function ChatHistoryHeader() {
         }}
       >
         <option value="default" disabled>
-          チャット履歴を選択
+          {t("Select a chat history")}
         </option>
         {chatHistories
           .slice()
