@@ -1,6 +1,6 @@
 import { EventEmitter } from "events";
 import ChatMessage from "./chat_message";
-import { Request } from "@/lib/models/openai/gpt-4o";
+import { Request } from "@/lib/models/requests";
 
 export default class ChatRoom extends EventEmitter {
   private conversations: ChatMessage[];
@@ -17,7 +17,7 @@ export default class ChatRoom extends EventEmitter {
   public async Chat(prompt: string) {
     this.AddConversation("user", prompt);
     let counter = 0;
-    for await (const chunk of Request(this.conversations)) {
+    for await (const chunk of Request("openai", "gpt-4o", this.conversations)) {
       if (counter == 0) {
         this.AddConversation("assistant", chunk);
       } else {

@@ -1,9 +1,11 @@
 import ChatMessage from "@/lib/chat/chat_message";
 
 export async function* Request(
+  provider: string,
+  model: string,
   conversations: ChatMessage[]
 ): AsyncGenerator<string> {
-  const response = await fetch("/api/chat/completions/openai/gpt-4o", {
+  const response = await fetch(`/api/chat/completions/${provider}/${model}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
