@@ -58,7 +58,13 @@ export default function ChatRoomUI() {
         <div className="md:hidden">
           <ChatHistoryHeader />
         </div>
-        <Conversations />
+        {chat_room.Conversations.length === 0 ? (
+          <div className="flex flex-1 justify-center items-center">
+            <div>Model Selector</div>
+          </div>
+        ) : (
+          <Conversations />
+        )}
         <ChatInput />
       </div>
     </ChatRoomProvider>
