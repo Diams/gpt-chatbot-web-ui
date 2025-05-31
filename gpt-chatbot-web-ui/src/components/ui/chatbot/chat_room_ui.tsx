@@ -7,6 +7,7 @@ import ChatRoom from "@/lib/chat/chat_room";
 import ChatHistoryHeader from "./chat_room/chat_history_header";
 import ChatInput from "./chat_room/chat_input";
 import Conversations from "./chat_room/conversations";
+import ModelSelector from "./chat_room/model_selector";
 import ChatHistoryManager from "@/lib/chat/chat_history_manager";
 import { DefaultModel } from "@/lib/models/models";
 
@@ -58,7 +59,13 @@ export default function ChatRoomUI() {
         <div className="md:hidden">
           <ChatHistoryHeader />
         </div>
-        <Conversations />
+        {chat_room.Conversations.length === 0 ? (
+          <div className="flex flex-1 justify-center items-center">
+            <ModelSelector />
+          </div>
+        ) : (
+          <Conversations />
+        )}
         <ChatInput />
       </div>
     </ChatRoomProvider>
