@@ -4,10 +4,18 @@ import { Request } from "@/lib/models/requests";
 
 export default class ChatRoom extends EventEmitter {
   private conversations: ChatMessage[];
+  private provider: string;
+  private model: string;
 
-  constructor(cst_conversations: ChatMessage[]) {
+  constructor(
+    cst_conversations: ChatMessage[],
+    cst_provider: string,
+    cst_model: string
+  ) {
     super();
     this.conversations = [...cst_conversations];
+    this.provider = cst_provider;
+    this.model = cst_model;
   }
 
   get Conversations() {

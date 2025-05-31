@@ -14,13 +14,21 @@ function ProvideSelectedChatIdChangedListener(
   chat_history_manager: ChatHistoryManager
 ): () => void {
   return () => {
-    chat_room_setter(new ChatRoom(chat_history_manager.SelectedConversations));
+    chat_room_setter(
+      new ChatRoom(
+        chat_history_manager.SelectedConversations,
+        "openai",
+        "gpt-4o"
+      )
+    );
   };
 }
 
 export default function ChatRoomUI() {
   const chat_history_manager = useChatHistoryManager();
-  const [chat_room, set_chat_room] = useState<ChatRoom>(new ChatRoom([]));
+  const [chat_room, set_chat_room] = useState<ChatRoom>(
+    new ChatRoom([], "openai", "gpt-4o")
+  );
   useEffect(() => {
     chat_history_manager.Initialize();
     const seleceted_chat_id_changed_listener =
@@ -29,7 +37,13 @@ export default function ChatRoomUI() {
       "selected_chat_id_changed",
       seleceted_chat_id_changed_listener
     );
-    set_chat_room(new ChatRoom(chat_history_manager.SelectedConversations));
+    set_chat_room(
+      new ChatRoom(
+        chat_history_manager.SelectedConversations,
+        "openai",
+        "gpt-4o"
+      )
+    );
     return () => {
       chat_history_manager.off(
         "selected_chat_id_changed",
