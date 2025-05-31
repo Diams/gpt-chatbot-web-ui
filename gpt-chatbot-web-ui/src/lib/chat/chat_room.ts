@@ -1,6 +1,6 @@
 import { EventEmitter } from "events";
 import ChatMessage from "./chat_message";
-import { Request } from "@/lib/models/openai/gpt-4o";
+import { Request } from "@/lib/models/gpt-4o";
 
 export default class ChatRoom extends EventEmitter {
   private conversations: ChatMessage[];
