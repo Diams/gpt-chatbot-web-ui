@@ -4,20 +4,18 @@ import { OpenAiApiKey } from "@/lib/models/api_key_provider";
 import { Stream } from "openai/streaming.mjs";
 
 interface ChatCompletionProps {
-  provider: string;
-  model: string;
+  params: Promise<{
+    provider: string;
+    model: string;
+  }>;
 }
 
 export async function POST(
   request: NextRequest,
-  context?: { params?: Promise<ChatCompletionProps> }
+  { params }: ChatCompletionProps
 ): Promise<Response> {
   const { messages } = await request.json();
-  // provider/modelをcontextから取得（awaitが必要）
-  const params = context?.params
-    ? await context.params
-    : { provider: "openai", model: "gpt-4o" };
-  const provider = params.provider || "openai";
+  const { provider, model } = await params;
   let client = null;
   if (provider === "openai") {
     client = new OpenAI({ apiKey: OpenAiApiKey });
@@ -30,7 +28,6 @@ export async function POST(
       },
     });
   }
-  const model = params.model || "gpt-4o";
   const completion = await client.chat.completions.create({
     model: model,
     messages: messages,
