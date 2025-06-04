@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import TextareaAutosize from "react-textarea-autosize";
 import { useChatRoom } from "@/components/providers/context_providers/chat_room_provider";
 
-export default function ChatInput() {
+export default function ChatInput({ onChat }: { onChat?: () => void }) {
   const { t } = useTranslation();
   const [input_value, set_input] = useState("");
   const [is_blocked_input_bar_value, set_is_blocked_input_bar] =
@@ -17,6 +17,7 @@ export default function ChatInput() {
       const prompt = input_value;
       set_input("");
       set_is_blocked_input_bar(true);
+      if (onChat) onChat();
       await chat_room.Chat(prompt);
       set_is_blocked_input_bar(false);
     }

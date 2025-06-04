@@ -31,6 +31,7 @@ export default function ChatRoomUI() {
   const [chat_room, set_chat_room] = useState<ChatRoom>(
     new ChatRoom([], DefaultModel.provider, DefaultModel.model_name)
   );
+  const [is_chated, set_is_chated] = useState<boolean>(false);
   useEffect(() => {
     chat_history_manager.Initialize();
     const seleceted_chat_id_changed_listener =
@@ -55,18 +56,19 @@ export default function ChatRoomUI() {
   }, [chat_history_manager]);
   return (
     <ChatRoomProvider chat_room_instance={chat_room}>
-      <div className="flex flex-col w-full h-full">
+      <div className="flex flex-col w-full h-full relative">
         <div className="md:hidden">
           <ChatHistoryHeader />
         </div>
-        {chat_room.Conversations.length === 0 ? (
-          <div className="flex flex-1 justify-center items-center">
+        {chat_room.Conversations.length === 0 && !is_chated ? (
+          <div className="absolute top-1/2 left-1/2 -translate-1/2">
             <ModelSelector />
           </div>
         ) : (
-          <Conversations />
+          <></>
         )}
-        <ChatInput />
+        <Conversations />
+        <ChatInput onChat={() => set_is_chated(true)} />
       </div>
     </ChatRoomProvider>
   );
